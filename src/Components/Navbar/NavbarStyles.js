@@ -10,7 +10,7 @@ export const NavbarContainer = styled.div`
     position: sticky;
     height: 60px;
     width: 100%;
-    background-color: #d6d6d6;
+    background-color: #efefef;
     border-bottom: 1px solid black;
     padding: 0 20px;
     box-sizing: border-box;

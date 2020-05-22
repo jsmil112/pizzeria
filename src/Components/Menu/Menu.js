@@ -11,7 +11,7 @@ import {
 
 import MenuItem from "./MenuItem";
 
-const Menu = ({ currentCurrency, products }) => {
+const Menu = ({ currentCurrency, products, shoppingCart }) => {
     return(
         <MenuContainer>
             <MenuTitle>MENU</MenuTitle>
@@ -20,7 +20,11 @@ const Menu = ({ currentCurrency, products }) => {
             </MenuCategoriesContainer>
             <ItemsListContainer>
                     {products.map((product)=>(
-                        <MenuItem key={product.id} {...product} currentCurrency={currentCurrency}/>
+                        <MenuItem 
+                            key={product.id} 
+                            {...product} 
+                            currentCurrency={currentCurrency} 
+                            inCart={!!shoppingCart[product.id]}/>
                     ))}
             </ItemsListContainer>
         </MenuContainer>
@@ -30,6 +34,7 @@ const Menu = ({ currentCurrency, products }) => {
 Menu.propTypes = {
     currentCurrency: PropTypes.string.isRequired,
     products: PropTypes.array.isRequired,
+    shoppingCart: PropTypes.object.isRequired,
 }
 
 export default Menu;

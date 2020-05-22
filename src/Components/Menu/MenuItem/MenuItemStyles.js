@@ -48,5 +48,13 @@ export const AddButton = styled.div`
 
 export const RemoveButton = styled.div`
     display: flex;
-    height: 20px;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 150px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    color: white;
+    background: red;
+    cursor: pointer;
 `;
