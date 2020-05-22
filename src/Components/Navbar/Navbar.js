@@ -1,7 +1,7 @@
 import React from "react";
 
 import CurrencyButton from "./CurrencyButton";
-import { CurrencyButtonsContainer, CurrencyDivider, NavbarContainer, Title, ShoppingCart } from "./NavbarStyles";
+import { CurrencyButtonsContainer, NavbarContainer, Title, ShoppingCart } from "./NavbarStyles";
 
 export default () => {
     return(

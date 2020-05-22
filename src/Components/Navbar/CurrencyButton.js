@@ -1,12 +1,12 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import { setCurrencyDollarsDispatch, setCurrencyEurosDispatch } from "../../Redux/Actions/currency";
+import { setCurrencyDollarsDispatch, setCurrencyEurosDispatch } from "../../redux/actions/currencyActions";
 import { CurrencyButtonContainer } from "./NavbarStyles";
 
-const CurrencyButton = ({ currencyType })=>{
-    const currentCurrency = useSelector(state=>state.currency.current);
+const CurrencyButton = ({ currencyType }) => {
+    const currentCurrency = useSelector(state => state.currency.current);
     const dispatch = useDispatch();
 
     function buttonOnClick(){

@@ -7,7 +7,7 @@ import shoppingCart from "./assets/ShoppingCart.svg";
 export const NavbarContainer = styled.div`
     display: flex;
     align-items: center;
-    position: fixed;
+    position: sticky;
     height: 60px;
     width: 100%;
     background-color: #d6d6d6;
