@@ -8,6 +8,7 @@ export const NavbarContainer = styled.div`
     display: flex;
     align-items: center;
     position: sticky;
+    top: 0;
     height: 60px;
     width: 100%;
     background-color: #efefef;
@@ -21,6 +22,8 @@ export const Title = styled.div`
     font-family: "Teko", sans-serif;
     font-size: 44px;
     line-height: 44px;
+    cursor: pointer;
+    margin-bottom: -8px;
 `;
 
 export const CurrencyButtonsContainer = styled.div`

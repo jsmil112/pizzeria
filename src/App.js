@@ -8,9 +8,9 @@ import { fetchProducts } from "./redux/actions/productsActions";
 // ============ COMPONENTS ============= \\
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
-// import ShoppingCart from "./Components/ShoppingCart";
-// import OrderDetailsForm from "./Components/OrderDetailsForm";
-// import ConfirmOrder from "./Components/ConfirmOrder";
+import ShoppingCart from "./components/ShoppingCart";
+// import OrderDetailsForm from "./components/OrderDetailsForm";
+// import ConfirmOrder from "./components/ConfirmOrder";
 
 import { AppContainer } from "./components/utils/styledUtilElements";
 
@@ -35,7 +35,7 @@ export default () => {
     <AppContainer>
       <Navbar/>
       <Route exact path="/" component={Menu}/>
-      {/* <Route exact path="/Cart" component={ShoppingCart}/> */}
+      <Route exact path="/Cart" component={ShoppingCart}/>
     </AppContainer>
   );
 };
