@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { calculateCartSubTotal } from "../utils/utilFunctions";
@@ -16,14 +17,17 @@ import {
 import CartItem from "./CartItem";
 import CartHeader from "./CartItem/CartItemsHeader";
 
-const ShoppingCart = ({currentCurrency, productMap, shoppingCart})=>{
+const ShoppingCart = ({ currentCurrency, productMap, shoppingCart })=>{
+    const history = useHistory();
     const [cartTotal, setCartTotal] = useState(0);
 
     useEffect(() => {
         if(Object.keys(productMap).length) setCartTotal(calculateCartSubTotal(productMap, shoppingCart, currentCurrency));
     },[currentCurrency, shoppingCart, productMap]);
 
-    console.log(cartTotal);
+    function checkoutOnClick() {
+        history.push("/orderdetails");
+    }
 
     return(
         <ShoppingCartContainer>
@@ -32,7 +36,7 @@ const ShoppingCart = ({currentCurrency, productMap, shoppingCart})=>{
             {!!Object.keys(productMap).length &&
                 <>
                     <CartItems>
-                        { Object.keys(shoppingCart).map((itemId)=>
+                        {Object.keys(shoppingCart).map((itemId)=>
                             <CartItem
                                 key = {itemId}
                                 {...productMap[itemId]}
@@ -44,7 +48,7 @@ const ShoppingCart = ({currentCurrency, productMap, shoppingCart})=>{
                     <PriceContainer>
                         <PriceBox>
                             <SubtotalContainer>Subtotal: <Price>{cartTotal}</Price></SubtotalContainer> 
-                            <CheckoutButton>Checkout</CheckoutButton>
+                            <CheckoutButton onClick = {checkoutOnClick}>Checkout</CheckoutButton>
                         </PriceBox>
                     </PriceContainer>
                 </>

@@ -9,7 +9,7 @@ import { fetchProducts } from "./redux/actions/productsActions";
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
 import ShoppingCart from "./components/ShoppingCart";
-// import OrderDetailsForm from "./components/OrderDetailsForm";
+import OrderDetailsForm from "./components/OrderDetailsForm";
 // import ConfirmOrder from "./components/ConfirmOrder";
 
 import { AppContainer } from "./components/utils/styledUtilElements";
@@ -17,6 +17,7 @@ import { AppContainer } from "./components/utils/styledUtilElements";
 export default () => {
   const dispatch = useDispatch();
   const shoppingCart = useSelector(state => state.shoppingCart.currentCart);
+  const orderDetails = useSelector(state => state.orderDetails.details);
 
   // Fetch Menu items once app loads.
   useEffect(()=>{
@@ -31,11 +32,17 @@ export default () => {
     window.localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
   },[shoppingCart])
 
+  useEffect(()=>{
+    console.log(orderDetails)
+    window.localStorage.setItem('orderDetails', JSON.stringify(orderDetails));
+  },[orderDetails])
+
   return (
     <AppContainer>
       <Navbar/>
       <Route exact path="/" component={Menu}/>
-      <Route exact path="/Cart" component={ShoppingCart}/>
+      <Route exact path="/cart" component={ShoppingCart}/>
+      <Route exact path="/orderdetails" component={OrderDetailsForm}/>
     </AppContainer>
   );
 };

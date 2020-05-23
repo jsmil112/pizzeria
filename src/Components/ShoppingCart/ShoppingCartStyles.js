@@ -46,7 +46,6 @@ export const PriceBox = styled.div`
     display: flex;
     flex-direction: column;
     margin-right: -7px;
-
 `;
 
 export const Price = styled.div`
@@ -70,7 +69,7 @@ export const CheckoutButton = styled.div`
     border-radius: 4px;
     margin-bottom: 20px;
     color: white;
-    background: black;
+    background: #a0a0a0;
     cursor: pointer;
     margin-top: 20px;
 `;
