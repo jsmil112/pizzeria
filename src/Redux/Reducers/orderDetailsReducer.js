@@ -1,7 +1,8 @@
-import { ADD_ORDER_DETAILS } from "../constants";
+import { ADD_ORDER_DETAILS, RESET_ORDER_DETAILS } from "../constants";
 
 const initialState = {
-    details: {
+    details: JSON.parse(window.localStorage.getItem('orderDetails')) ||
+    {
         name: "",
         contactNumber: "",
         address: "",
@@ -9,9 +10,15 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case ADD_ORDER_DETAILS:
-            return { details: {...action.info} };
+            return { details: { ...action.info } };
+        case RESET_ORDER_DETAILS:
+            return { details: {
+                    name: "",
+                    contactNumber: "",
+                    address: "",
+                }};
         default:
             return state;
     }

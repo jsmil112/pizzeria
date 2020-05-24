@@ -10,7 +10,8 @@ import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
 import ShoppingCart from "./components/ShoppingCart";
 import OrderDetailsForm from "./components/OrderDetailsForm";
-// import ConfirmOrder from "./components/ConfirmOrder";
+import OrderPlaced from "./components/OrderPlaced";
+import ConfirmOrder from "./components/ConfirmOrder";
 
 import { AppContainer } from "./components/utils/styledUtilElements";
 
@@ -27,13 +28,11 @@ export default () => {
       })
   },[])
 
-  // Keep copy of shopping cart in browser storage.
+  // Keeping data in browser storage.
   useEffect(()=>{
     window.localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
   },[shoppingCart])
-
   useEffect(()=>{
-    console.log(orderDetails)
     window.localStorage.setItem('orderDetails', JSON.stringify(orderDetails));
   },[orderDetails])
 
@@ -42,7 +41,9 @@ export default () => {
       <Navbar/>
       <Route exact path="/" component={Menu}/>
       <Route exact path="/cart" component={ShoppingCart}/>
+      <Route exact path="/confirm" component={ConfirmOrder}/>
       <Route exact path="/orderdetails" component={OrderDetailsForm}/>
+      <Route exact path="/orderplaced" component={OrderPlaced}/>
     </AppContainer>
   );
 };

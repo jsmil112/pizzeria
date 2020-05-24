@@ -17,14 +17,21 @@ import {
 
 } from "./CartItemStyles";
 
-const CartItem = ({category, currentCurrency, dollar_price, euro_price, id, name, quantity}) => {
+import { firstToUppercase } from "../../utils/utilFunctions";
+
+const CartItem = ({
+    category, 
+    currentCurrency, 
+    dollar_price, 
+    euro_price, 
+    id, 
+    name, 
+    quantity, 
+    noAddRemoveButtons, 
+    showItemRemovePopup}) => {
     const dispatch = useDispatch();
     function calculateTotal(price){
         return Number.parseFloat(price * quantity).toFixed(2);
-    }
-
-    function firstToUppercase(word){
-        return word.charAt(0).toUpperCase() + word.slice(1);
     }
 
     function addOneOnClick(){
@@ -32,7 +39,9 @@ const CartItem = ({category, currentCurrency, dollar_price, euro_price, id, name
     }
 
     function removeOneOnClick(){
-        dispatch(removeOneFromCartDispatch(id))
+        quantity === 1 ? 
+            showItemRemovePopup() :
+            dispatch(removeOneFromCartDispatch(id))
     }
 
     return(
@@ -40,9 +49,9 @@ const CartItem = ({category, currentCurrency, dollar_price, euro_price, id, name
             <ItemName>{firstToUppercase(category)}: {name}</ItemName>
             <ItemPrice>{currentCurrency === 'dollar' ? `$ ${dollar_price}` : `€ ${euro_price}`}</ItemPrice>
             <QuantityContainer>
-                <RemoveOne onClick = {removeOneOnClick}>-</RemoveOne>
+                {!noAddRemoveButtons && <RemoveOne onClick = {removeOneOnClick}>-</RemoveOne>}
                 <QuantityNumber>{quantity}</QuantityNumber>
-                <AddOne onClick = {addOneOnClick}>+</AddOne>
+                {!noAddRemoveButtons &&<AddOne onClick = {addOneOnClick}>+</AddOne>}
             </QuantityContainer>
             <ItemTotalContainer>
                 <ItemTotal>
@@ -63,6 +72,7 @@ CartItem.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     quantity: PropTypes.number.isRequired,
+    showItemRemovePopup: PropTypes.func.isRequired,
  }
  
  export default CartItem;

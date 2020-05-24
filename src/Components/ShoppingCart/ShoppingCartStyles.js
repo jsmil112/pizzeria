@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
+import { StyledButton } from "../utils/styledUtilElements";
+
 export const ShoppingCartContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    align-self: center;
     width: 100%;
     font-size: 12px;
+    max-width: 1200px;
     @media(min-width: 535px){
         font-size: unset;
     }
@@ -24,13 +28,12 @@ export const CartItems = styled.div`
     align-items: center;
     width: 90%;
     padding: 0 25px;
-    max-width: 900px;
     @media(min-width: 535px){
         width: 75%;
     }
 `;
 
-export const PriceContainer = styled.div`
+export const CartFooterContainer = styled.div`
     display: flex;
     justify-content: flex-end;
     width: 90%;
@@ -42,14 +45,16 @@ export const PriceContainer = styled.div`
     }
 `;
 
-export const PriceBox = styled.div`
+export const PriceContainer = styled.div`
     display: flex;
     flex-direction: column;
-    margin-right: -7px;
+    margin-right: -29px;
+    align-items: center;
 `;
 
 export const Price = styled.div`
     margin-left: 22px;
+    width: 80px;
 `;
 
 export const SubtotalContainer = styled.div`
@@ -60,16 +65,38 @@ export const SubtotalContainer = styled.div`
     }
 `;
 
-export const CheckoutButton = styled.div`
+export const CheckoutButton = styled(StyledButton)`
+    margin-left:-35px;
+    @media(min-width: 535px) {
+        margin-left: unset;
+    }
+`;
+
+export const ButtonsContainer = styled.div`
     display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 30px;
-    width: 150px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    color: white;
-    background: #a0a0a0;
-    cursor: pointer;
-    margin-top: 20px;
+`;
+
+export const CancelButton = styled(StyledButton)`
+    background: #02b5a5;
+    margin-right: 10px;
+    width: 100px;
+    @media(min-width: 535px) {
+        width: 150px
+    }
+    &:hover {
+        background: #7eb5b0;
+    }
+`;
+
+export const RemoveButton = styled(StyledButton)`
+    margin-left: 10px;
+    width: 100px;
+    @media(min-width: 535px) {
+        width: 150px
+    }
+`;
+
+export const EmptyCartMessage = styled.div`
+    font-size: 25px;
+    margin-top: 100px;
 `;

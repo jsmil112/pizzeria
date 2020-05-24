@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { StyledButton } from "../../utils/styledUtilElements";
+
 export const ItemContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -33,28 +35,14 @@ export const ItemPrice = styled.div`
     margin-bottom: 10px;
 `;
 
-export const AddButton = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 30px;
-    width: 150px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    color: white;
+export const AddButton = styled(StyledButton)`
+    margin-top: 0;
     background: #02b5a5;
-    cursor: pointer;
+    &:hover {
+        background: #9bdad4;
+    }
 `;
 
-export const RemoveButton = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 30px;
-    width: 150px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    color: white;
-    background: red;
-    cursor: pointer;
+export const RemoveButton = styled(StyledButton)`
+    margin-top: 0;
 `;

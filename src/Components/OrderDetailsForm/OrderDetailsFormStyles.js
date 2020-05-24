@@ -16,7 +16,7 @@ export const Title = styled.div`
 export const FormContainer = styled.div`
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 300px;
 `;
 
 export const FormInput = styled.input`
@@ -24,18 +24,4 @@ export const FormInput = styled.input`
     height: 25px;
     font-size: 14px;
     margin: 7px 0;
-`;
-
-export const ContinueButton = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 30px;
-    width: 150px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    color: white;
-    background: #a0a0a0;
-    cursor: pointer;
-    margin-top: 20px;
 `;

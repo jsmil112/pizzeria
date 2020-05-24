@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART, REMOVE_ONE_FROM_CART } from "../constants"
+import { ADD_TO_CART, REMOVE_FROM_CART, REMOVE_ONE_FROM_CART, RESET_CART } from "../constants"
 
 const initialState = {
     currentCart: JSON.parse(window.localStorage.getItem('shoppingCart')) || {},
@@ -20,6 +20,8 @@ export default (state = initialState, action) => {
         case REMOVE_FROM_CART:
             delete newCart[action.productId];
             return {currentCart: newCart}
+        case RESET_CART:
+            return {currentCart: {}};
         default:
             return state;
     }

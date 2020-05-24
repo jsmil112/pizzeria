@@ -38,7 +38,11 @@ export const CurrencyButtonsContainer = styled.div`
 export const CurrencyButtonContainer = styled.div`
     display: flex;
     width: 30px;
-    ${({isActive}) => isActive && "background: #d0e7f9;"}
+    // ${({isActive}) => isActive && "background: #d0e7f9;"}
+    ${({isActive}) => isActive && `
+        -webkit-box-shadow: inset 0px 0px 4px 1px rgba(0,0,0,0.75);
+        -moz-box-shadow: inset 0px 0px 4px 1px rgba(0,0,0,0.75);
+        box-shadow: inset 0px 0px 4px 1px rgba(0,0,0,0.75);`}
     ${({currencyType}) => currencyType === "dollar" ?
         `background-image: url(${dollarIcon}); border-radius: 4px 0 0 4px; border-right: 1px solid black;` :
         `background-image: url(${euroIcon}); border-radius: 0 4px 4px 0;` 
@@ -47,7 +51,7 @@ export const CurrencyButtonContainer = styled.div`
     background-position: center;
     cursor: pointer;
     &:hover {
-        background-color: grey;
+        background-color: #dbdbdb;
     }
 `;
 
