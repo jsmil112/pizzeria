@@ -1,6 +1,11 @@
 # Pizzeria
 
-A mock e-store for a Pizza delivery company created with a 1 week time constraint. The app uses the repo "pizzeriaAPI" for all server requests. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A mock e-store for a Pizza delivery company created with a 1 week time constraint. The app uses the repo [pizzeriaAPI](https://github.com/jsmil112/pizzeriaAPI) for all server requests. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Deployed Project
+
+https://pizzeria-store.herokuapp.com/ 
+Note: This project uses a free database storage that may expire after some time and will cause the above link not to load resources. Also, menu items may take a moment to initially load as they are coming from a load speed source. 
 
 ## Dependencies:
 
@@ -35,3 +40,5 @@ A mock e-store for a Pizza delivery company created with a 1 week time constrain
 ## Notes
 
 The default create-react-app scripts have been overwritten as the latest version of react-scripts is creating problems when deploying to Heroku. It tries to run the development server instead of the production. This is why "npm run dev" runs the development server and "npm start" serves the production build. 
+
+
