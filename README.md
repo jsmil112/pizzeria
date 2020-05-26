@@ -4,7 +4,7 @@ A mock e-store for a Pizza delivery company created with a 1 week time constrain
 
 ## Deployed Project
 
-https://pizzeria-store.herokuapp.com/ 
+https://pizzeria-store.herokuapp.com/ \
 Note: This project uses a free database storage that may expire after some time and will cause the above link not to load resources. Also, menu items may take a moment to initially load as they are coming from a load speed source. 
 
 ## Dependencies:
