@@ -1,6 +1,6 @@
 # Pizzeria
 
-A mock e-store for a Pizza delivery company created with a 1 week time constraint. The app uses the repo [pizzeriaAPI](https://github.com/jsmil112/pizzeriaAPI) for all server requests. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A Javascript/React based mock e-store for a Pizza delivery company created with a 1 week time constraint. The app uses the repo [pizzeriaAPI](https://github.com/jsmil112/pizzeriaAPI) for all server requests. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Deployed Project
 
