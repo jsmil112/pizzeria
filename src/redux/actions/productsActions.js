@@ -1,7 +1,7 @@
-import { SET_PRODUCTS } from "../constants";
 import axios from "axios";
+import { SET_PRODUCTS } from "../constants";
 
-const urlBase = process.env.REACT_APP_APP_BASE_URL;
+const urlBase = process.env.REACT_APP_BASE_URL;
 
 export const setProductsDispatch = products => ({
     type: SET_PRODUCTS,

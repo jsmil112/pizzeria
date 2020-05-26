@@ -1,16 +1,23 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import { useLastLocation } from "react-router-last-location";
 
+// ============ COMPONENTS / STYLED COMPONENTS =========== \\
 import {
-    Title,
-    Subtitle,
     OrderPlacedContainer,
-
+    Subtitle,
+    Title,
 } from "./OrderPlacedStyles";
 import { StyledButton } from "../utils/styledUtilElements";
 
 export default () => {
     const history = useHistory();
+    const lastLocation = useLastLocation();
+    
+    // Ensure entry to view comes only from "/confirm".
+    if(!lastLocation || lastLocation.pathname !== "/confirm") {
+        history.push("/");
+    }
 
     function returnToMenuOnClick(){
         history.push("/");

@@ -3,10 +3,19 @@ import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
+// ============ REDUX ACTIONS =========== \\
 import { resetCartDispatch } from "../../redux/actions/shoppingCartActions";
 import { resetOrderDetailsDispatch } from "../../redux/actions/orderDetailsActions";
+
+// ============ FUNCTIONS =========== \\
 import { calculateCartSubTotal } from "../utils/utilFunctions";
 import { postOrder } from "../../apiFunctions";
+
+// ============ COMPONENTS / STYLED COMPONENTS =========== \\
+import CartHeader from "../ShoppingCart/CartItem/CartItemsHeader";
+import CartItem from "../ShoppingCart/CartItem";
+import PopupMessage from "../utils/PopupMessage";
+import { CartItems } from "../ShoppingCart/ShoppingCartStyles";
 import {
     ConfirmOrderContainer,
     DetailItemContainer,
@@ -20,13 +29,7 @@ import {
     PriceItemLabel,
     Title,
 } from "./ConfirmOrderStyles";
-import {
-    CartItems,
-} from "../ShoppingCart/ShoppingCartStyles";
-import CartItem from "../ShoppingCart/CartItem";
-import CartHeader from "../ShoppingCart/CartItem/CartItemsHeader";
 import { StyledButton } from "../utils/styledUtilElements";
-import PopupMessage from "../utils/PopupMessage";
 
 const ConfirmOrder = ({ currentCurrency, orderDetails, productMap, shoppingCart }) => {
     const history = useHistory();
@@ -35,6 +38,7 @@ const ConfirmOrder = ({ currentCurrency, orderDetails, productMap, shoppingCart 
     const [isProcessing, setIsProcessing] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
+    // Updates subtotal on currency type change.
     useEffect(() => {
         if(Object.keys(productMap).length) {
             setCartSubTotal(calculateCartSubTotal(productMap, shoppingCart, currentCurrency));
@@ -53,7 +57,6 @@ const ConfirmOrder = ({ currentCurrency, orderDetails, productMap, shoppingCart 
         setIsProcessing(true);
 
         let items = []
-
         for(let itemId in shoppingCart) {
             items.push({
                 id : itemId,
@@ -65,22 +68,22 @@ const ConfirmOrder = ({ currentCurrency, orderDetails, productMap, shoppingCart 
                 name : orderDetails.name,
                 contact_number : orderDetails.contactNumber,
                 address : orderDetails.address,
-                subtotal : calculateCartSubTotal(productMap, shoppingCart, 'dollar'),
+                subtotal : calculateCartSubTotal(productMap, shoppingCart, "dollar"),
                 shipping : "5.00",
-                total : calculateTotal('dollar'),
+                total : calculateTotal("dollar"),
                 items
         }
 
         postOrder(data).then(res => {
             setIsProcessing(false);
             if(res === 200) {
-                localStorage.removeItem('shoppingCart');
-                localStorage.removeItem('orderDetails');
+                localStorage.removeItem("shoppingCart");
+                localStorage.removeItem("orderDetails");
+                history.push("/orderplaced");
                 dispatch((dispatch) => {
                     dispatch(resetOrderDetailsDispatch());
                     dispatch(resetCartDispatch());
                 });
-                history.push("/orderplaced");
             }
             else setErrorMessage("There was a problem processing your order")
         })
@@ -93,13 +96,13 @@ const ConfirmOrder = ({ currentCurrency, orderDetails, productMap, shoppingCart 
             {!!Object.keys(productMap).length &&
                 <>
                     <CartItems>
-                        {Object.keys(shoppingCart).map((itemId)=>
+                        {Object.keys(shoppingCart).map((itemId) =>
                             <CartItem
                                 key = {itemId}
                                 {...productMap[itemId]}
-                                quantity = {shoppingCart[itemId]}
                                 currentCurrency = {currentCurrency}
                                 noAddRemoveButtons = {true}
+                                quantity = {shoppingCart[itemId]}
                             />
                         )}
                     </CartItems>
@@ -107,34 +110,37 @@ const ConfirmOrder = ({ currentCurrency, orderDetails, productMap, shoppingCart 
                         <OrderDetailsContainer>
                             <DetailItemContainer>
                                 <DetailLabel>Name: </DetailLabel>
-                                <Detail>{orderDetails.name}</Detail>
+                                <Detail data-cy = "detailName" >{orderDetails.name}</Detail>
                             </DetailItemContainer>
                             <DetailItemContainer>
                                 <DetailLabel>Contact Number: </DetailLabel>
-                                <Detail>{orderDetails.contactNumber}</Detail>
+                                <Detail data-cy = "detailContact" >{orderDetails.contactNumber}</Detail>
                             </DetailItemContainer>
                             <DetailItemContainer>
                                 <DetailLabel>Adress: </DetailLabel>
-                                <Detail>{orderDetails.address}</Detail>
+                                <Detail data-cy = "detailAddress" >{orderDetails.address}</Detail>
                             </DetailItemContainer>
                         </OrderDetailsContainer>
                         <PriceContainer>
                             <PriceItemContainer>
-                                <PriceItemLabel>Subtotal:</PriceItemLabel><Price>{currentCurrency === 'dollar' ? "$ " : "€ "}{cartSubTotal}</Price>
+                                <PriceItemLabel>Subtotal:</PriceItemLabel>
+                                <Price data-cy = "subtotal">{currentCurrency === "dollar" ? "$ " : "€ "}{cartSubTotal}</Price>
                             </PriceItemContainer> 
                             <PriceItemContainer>
-                                <PriceItemLabel>Shipping:</PriceItemLabel><Price>{currentCurrency === "dollar" ? "$ 5.00" : "€ 4.50"}</Price>
+                                <PriceItemLabel>Shipping:</PriceItemLabel>
+                                <Price data-cy = "shipping">{currentCurrency === "dollar" ? "$ 5.00" : "€ 4.50"}</Price>
                             </PriceItemContainer>
                             <PriceItemContainer>
-                                <PriceItemLabel>Total:</PriceItemLabel><Price>{currentCurrency === 'dollar' ? "$ " : "€ "}{calculateTotal(currentCurrency)}</Price>
+                                <PriceItemLabel>Total:</PriceItemLabel>
+                                <Price data-cy = "total">{currentCurrency === "dollar" ? "$ " : "€ "}{calculateTotal(currentCurrency)}</Price>
                             </PriceItemContainer>  
-                            <StyledButton onClick = {confirmOrderOnClick}>Place Order</StyledButton>
+                            <StyledButton data-cy = "placeOrder" onClick = {confirmOrderOnClick}>Place Order</StyledButton>
                         </PriceContainer>
                     </PriceAndDetailsContainer>
-                    {isProcessing &&<PopupMessage text={"Processing order..."}/>}
+                    {isProcessing && <PopupMessage dataCy = "processPopup" text = {"Processing order..."}/>}
                     {errorMessage &&
-                        <PopupMessage text={"There was a problem processing your order. Please try again."}>
-                            <StyledButton onClick = {()=>setErrorMessage("")}>Ok</StyledButton>
+                        <PopupMessage text = {"There was a problem processing your order. Please try again."}>
+                            <StyledButton onClick = {() => setErrorMessage("")}>Ok</StyledButton>
                         </PopupMessage>
                     }
                 </>

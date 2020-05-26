@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const urlBase = process.env.REACT_APP_APP_BASE_URL;
+const urlBase = process.env.REACT_APP_BASE_URL;
 
 export const postOrder = (data) => {
     return axios.post(`${urlBase}/order`, {

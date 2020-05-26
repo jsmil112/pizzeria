@@ -1,5 +1,6 @@
 import React from "react";
 
+// ============ COMPONENTS / STYLED COMPONENTS =========== \\
 import {
     HeaderContainer,
     ItemName,
@@ -14,7 +15,7 @@ export default () => {
             <ItemName>Item</ItemName>
             <ItemPrice>Price</ItemPrice>
             <QuantityContainer>Quantity</QuantityContainer>
-            <ItemTotalContainer style={{justifyContent:"flex-end"}}>Total</ItemTotalContainer>
+            <ItemTotalContainer style = {{justifyContent:"flex-end"}}>Total</ItemTotalContainer>
         </HeaderContainer>
     )
 };

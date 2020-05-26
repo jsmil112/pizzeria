@@ -1,7 +1,7 @@
 import { ADD_ORDER_DETAILS, RESET_ORDER_DETAILS } from "../constants";
 
 const initialState = {
-    details: JSON.parse(window.localStorage.getItem('orderDetails')) ||
+    details: JSON.parse(window.localStorage.getItem("orderDetails")) ||
     {
         name: "",
         contactNumber: "",

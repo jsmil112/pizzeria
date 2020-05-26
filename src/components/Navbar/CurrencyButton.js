@@ -1,17 +1,20 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
+// ============ REDUX ACTIONS =========== \\
 import { setCurrencyDollarsDispatch, setCurrencyEurosDispatch } from "../../redux/actions/currencyActions";
+
+// ============ COMPONENTS / STYLED COMPONENTS =========== \\
 import { CurrencyButtonContainer } from "./NavbarStyles";
 
-const CurrencyButton = ({ currencyType }) => {
-    const currentCurrency = useSelector(state => state.currency.current);
+const CurrencyButton = ({ currencyType, dataCy }) => {
     const dispatch = useDispatch();
+    const currentCurrency = useSelector(state => state.currency.current);
 
     function buttonOnClick(){
         if (currentCurrency === currencyType) return;
-        currencyType === 'dollar' ? 
+        currencyType === "dollar" ? 
             dispatch(setCurrencyDollarsDispatch()) :
             dispatch(setCurrencyEurosDispatch());
     }
@@ -21,12 +24,14 @@ const CurrencyButton = ({ currencyType }) => {
             onClick = {buttonOnClick}
             currencyType = {currencyType} 
             isActive = {currentCurrency === currencyType}
+            data-cy = {dataCy}
         />
     )
 }
 
 CurrencyButton.propTypes = {
-    currencyType: PropTypes.oneOf(['dollar','euro']).isRequired,
+    currencyType: PropTypes.oneOf(["dollar","euro"]).isRequired,
+    dataCy: PropTypes.string
 }
 
 export default CurrencyButton;

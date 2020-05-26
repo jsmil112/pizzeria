@@ -1,11 +1,13 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
+// ============ COMPONENTS / STYLED COMPONENTS =========== \\
 import CurrencyButton from "./CurrencyButton";
 import { CurrencyButtonsContainer, NavbarContainer, Title, ShoppingCart } from "./NavbarStyles";
 
 export default () => {
     const history = useHistory();
+    
     function shoppingCartOnClick(){
         history.push("/cart");
     }
@@ -17,10 +19,10 @@ export default () => {
         <NavbarContainer>
             <Title onClick = {titleOnClick}>Pizzeria</Title>
             <CurrencyButtonsContainer>
-                <CurrencyButton currencyType = {"dollar"}/>
-                <CurrencyButton currencyType = {"euro"}/>
+                <CurrencyButton dataCy="dollar" currencyType = {"dollar"}/>
+                <CurrencyButton dataCy="euro" currencyType = {"euro"}/>
             </CurrencyButtonsContainer>
-            <ShoppingCart onClick = {shoppingCartOnClick}/>
+            <ShoppingCart onClick = {shoppingCartOnClick} data-cy="cartIcon"/>
         </NavbarContainer>
     )
 };
