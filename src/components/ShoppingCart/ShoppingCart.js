@@ -1,30 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { calculateCartSubTotal, firstToUppercase } from "../utils/utilFunctions";
+// ============ REDUX ACTIONS =========== \\
 import { removeFromCartDispatch } from "../../redux/actions/shoppingCartActions";
 
-import {
-    CartItems,
-    Price,
-    CartFooterContainer,
-    PriceContainer,
-    ShoppingCartContainer,
-    SubtotalContainer,
-    CheckoutButton,
-    CancelButton,
-    RemoveButton,
-    ButtonsContainer,
-    EmptyCartMessage,
-    Title,
-} from "./ShoppingCartStyles";
+// ============ FUNCTIONS =========== \\
+import { calculateCartSubTotal, firstToUppercase } from "../utils/utilFunctions";
+
+// ============ COMPONENTS / STYLED COMPONENTS =========== \\
 import CartItem from "./CartItem";
 import CartHeader from "./CartItem/CartItemsHeader";
 import PopupMessage from "../utils/PopupMessage";
+import {
+    ButtonsContainer,
+    CancelButton,
+    CartItems,
+    CartFooterContainer,
+    CheckoutButton,
+    EmptyCartMessage,
+    Price,
+    PriceContainer,
+    RemoveButton,
+    ShoppingCartContainer,
+    SubtotalContainer,
+    Title,
+} from "./ShoppingCartStyles";
 
-const ShoppingCart = ({ currentCurrency, productMap, shoppingCart })=>{
+const ShoppingCart = ({ currentCurrency, productMap, shoppingCart }) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const [cartTotal, setCartTotal] = useState(0);
@@ -32,26 +36,27 @@ const ShoppingCart = ({ currentCurrency, productMap, shoppingCart })=>{
     const [toDeleteItem, setToDeleteItem] = useState(null);
     const [isEmptyCart, setIsEmptyCart] = useState(false)
 
+    // Updates cart total on changes to currency type changes and item quantity.
     useEffect(() => {
-        if(Object.keys(productMap).length) setCartTotal(calculateCartSubTotal(productMap, shoppingCart, currentCurrency));
-    },[currentCurrency, shoppingCart, productMap]);
+        if (Object.keys(productMap).length) setCartTotal(calculateCartSubTotal(productMap, shoppingCart, currentCurrency));
+    }, [currentCurrency, shoppingCart, productMap]);
 
     useEffect(() => {
-        if(!Object.keys(shoppingCart).length) setIsEmptyCart(true);
-    },[shoppingCart])
+        if (!Object.keys(shoppingCart).length) setIsEmptyCart(true);
+    }, [shoppingCart])
 
     function checkoutOnClick() {
-        if(showPopup || !Object.keys(shoppingCart).length) return;
+        if (showPopup || !Object.keys(shoppingCart).length) return;
         history.push("/orderdetails");
     }
 
-    function removeItem(){
+    function removeItem() {
         dispatch(removeFromCartDispatch(toDeleteItem.id))
         setShowPopup(false);
         setToDeleteItem(null);
     }
 
-    function showItemRemovePopup(name, category, id){
+    function showItemRemovePopup(name, category, id) {
         setToDeleteItem({
             name,
             category,
@@ -60,39 +65,42 @@ const ShoppingCart = ({ currentCurrency, productMap, shoppingCart })=>{
         setShowPopup(true);
     }
 
-    return(
+    return (
         <ShoppingCartContainer>
             <Title>Your Order</Title>
-            <CartHeader/>
+            <CartHeader />
             {!!Object.keys(productMap).length &&
                 <>
                     <CartItems>
-                        {!isEmptyCart ? 
-                            (Object.keys(shoppingCart).map((itemId)=>
-                            <CartItem
-                                key = {itemId}
-                                {...productMap[itemId]}
-                                quantity = {shoppingCart[itemId]}
-                                currentCurrency = {currentCurrency}
-                                showItemRemovePopup = {
+                        {!isEmptyCart ?
+                            (Object.keys(shoppingCart).map((itemId) =>
+                                <CartItem
+                                    key = {itemId}
+                                    {...productMap[itemId]}
+                                    quantity = {shoppingCart[itemId]}
+                                    currentCurrency = {currentCurrency}
+                                    showItemRemovePopup = {
                                         () => showItemRemovePopup(productMap[itemId].name, productMap[itemId].category, itemId)
                                     }
-                            />)) :
-                            (<EmptyCartMessage>Your cart is empty</EmptyCartMessage>)
+                                />)) :
+                            (<EmptyCartMessage data-cy = "emptyCart">Your cart is empty</EmptyCartMessage>)
                         }
                     </CartItems>
                     {!isEmptyCart &&
                         <CartFooterContainer>
                             <PriceContainer>
-                                <SubtotalContainer>Subtotal: <Price>{currentCurrency === 'dollar' ? "$ " : "€ "}{cartTotal}</Price></SubtotalContainer> 
-                                <CheckoutButton onClick = {checkoutOnClick}>Checkout</CheckoutButton>
+                                <SubtotalContainer>Subtotal: <Price>{currentCurrency === "dollar" ? "$ " : "€ "}{cartTotal}</Price></SubtotalContainer>
+                                <CheckoutButton data-cy = "checkout" onClick={checkoutOnClick}>Checkout</CheckoutButton>
                             </PriceContainer>
                         </CartFooterContainer>}
-                    {showPopup && 
-                        <PopupMessage text={`Remove "${firstToUppercase(toDeleteItem.category)}: ${toDeleteItem.name}" from your cart?`}>
+                    {showPopup &&
+                        <PopupMessage 
+                            dataCy = "removePopup" 
+                            text = {`Remove "${firstToUppercase(toDeleteItem.category)}: ${toDeleteItem.name}" from your cart?`}
+                        >
                             <ButtonsContainer>
-                                <CancelButton onClick = {() => setShowPopup(false)}>Cancel</CancelButton>
-                                <RemoveButton onClick = {removeItem}>Remove</RemoveButton>
+                                <CancelButton data-cy = "cancelButton" onClick = {() => setShowPopup(false)}>Cancel</CancelButton>
+                                <RemoveButton data-cy = "removeButton" onClick = {removeItem}>Remove</RemoveButton>
                             </ButtonsContainer>
                         </PopupMessage>}
                 </>

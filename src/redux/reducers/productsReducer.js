@@ -7,7 +7,7 @@ const initialState = {
 export default (state = initialState, action) => {
     switch(action.type) {
         case SET_PRODUCTS:
-            return { productsList: action.products };
+            return {productsList: action.products};
         default:
             return state;
     }

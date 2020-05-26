@@ -2,17 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+// ============ REDUX ACTIONS =========== \\
 import { addOrderDetailsDispatch } from "../../redux/actions/orderDetailsActions";
 
+// ============ COMPONENTS / STYLED COMPONENTS =========== \\
+import PopupMessage from "../utils/PopupMessage";
 import {
-    OrderDetailsContainer,
-    Title,
     FormContainer,
     FormInput,
-    ContinueButton,
+    OrderDetailsContainer,
+    Title,
 } from "./OrderDetailsFormStyles";
 import { StyledButton } from "../utils/styledUtilElements";
-import PopupMessage from "../utils/PopupMessage";
 
 export default () => {
     const dispatch = useDispatch();
@@ -27,6 +28,7 @@ export default () => {
         setName(prevSetOrderDetails.name);
         setContactNumber(prevSetOrderDetails.contactNumber);
         setAddress(prevSetOrderDetails.address);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     function formOnChange(e, setState){
@@ -46,14 +48,32 @@ export default () => {
         <OrderDetailsContainer>
             <Title>Order Details</Title>
             <FormContainer>
-                <FormInput type="text" placeholder="Name" value={name} onChange={(e) => formOnChange(e, setName)}/>
-                <FormInput type="text" placeholder="Contact Number" value={contactNumber} onChange={(e) => formOnChange(e, setContactNumber)}/>
-                <FormInput type="text" placeholder="Address" value={address} onChange={(e) => formOnChange(e, setAddress)}/>
+                <FormInput 
+                    data-cy = "nameInput"
+                    type = "text" 
+                    placeholder = "Name" 
+                    value = {name} 
+                    onChange = {(e) => formOnChange(e, setName)}
+                />
+                <FormInput 
+                    data-cy = "contactInput"
+                    type = "text" 
+                    placeholder = "Contact Number" 
+                    value = {contactNumber} 
+                    onChange={(e) => formOnChange(e, setContactNumber)}
+                />
+                <FormInput 
+                    data-cy = "addressInput"
+                    type = "text" 
+                    placeholder = "Address" 
+                    value = {address} 
+                    onChange = {(e) => formOnChange(e, setAddress)}
+                />
             </FormContainer>
-            <StyledButton onClick = {continueOnClick}>Continue</StyledButton>
-        {showPopup && <PopupMessage text={"Incomplete form. Please provide all requested information to continue."}>
-                        <StyledButton onClick = {() => setShowPopup(false)}>Ok</StyledButton>
-                    </PopupMessage>}
+            <StyledButton data-cy = "continueButton" onClick = {continueOnClick}>Continue</StyledButton>
+            {showPopup && <PopupMessage dataCy = "popupMessage" text = {"Incomplete form. Please provide all requested information to continue."}>
+                             <StyledButton data-cy = "okButton" onClick = {() => setShowPopup(false)}>Ok</StyledButton>
+                          </PopupMessage>}
         </OrderDetailsContainer>
     )
 };

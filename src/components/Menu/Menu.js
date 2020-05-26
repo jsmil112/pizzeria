@@ -1,6 +1,8 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
+// ============ COMPONENTS / STYLED COMPONENTS =========== \\
+import MenuItem from "./MenuItem";
 import { 
     MenuCategory,
     MenuCategoriesContainer, 
@@ -9,22 +11,20 @@ import {
     ItemsListContainer,
 } from "./MenuStyles"
 
-import MenuItem from "./MenuItem";
-
 const Menu = ({ currentCurrency, products, shoppingCart }) => {
     return(
         <MenuContainer>
             <MenuTitle>MENU</MenuTitle>
             <MenuCategoriesContainer>
-                <MenuCategory isActive={true}>Pizza</MenuCategory>
+                <MenuCategory isActive = {true}>Pizza</MenuCategory>
             </MenuCategoriesContainer>
-            <ItemsListContainer>
-                    {products.map((product)=>(
+            <ItemsListContainer id = "menuList">
+                    {products.map((product) => (
                         <MenuItem 
-                            key={product.id} 
+                            key = {product.id} 
                             {...product} 
-                            currentCurrency={currentCurrency} 
-                            inCart={!!shoppingCart[product.id]}/>
+                            currentCurrency = {currentCurrency} 
+                            inCart = {!!shoppingCart[product.id]}/>
                     ))}
             </ItemsListContainer>
         </MenuContainer>
